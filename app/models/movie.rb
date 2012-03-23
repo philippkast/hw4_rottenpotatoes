@@ -8,12 +8,14 @@ class Movie < ActiveRecord::Base
     foundMovie = Movie.find(:all, :order => sortedby, :conditions => conditions)
 #    debugger   
 #    assert foundMovie.length == 1, "Expected one movie"
-    if (foundMovie == nil || foundMovie.length == 0)
-      return
+    
+    foundDirector = "Spielberg"
+    if (foundMovie != nil && foundMovie.length > 0)
+      foundDirector = foundMovie[0].director
     end
 
     sortedby = nil
-    conditions = conditions = ["director = ?", foundMovie[0].director]
+    conditions = conditions = ["director = ?", foundDirector]
     foundMovie = Movie.find(:all, :order => sortedby, :conditions => conditions)
   end
 end
